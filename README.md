@@ -1,6 +1,6 @@
 ## College Name - Team Name
 VRSEC - AIDS
-Team Members : P.Manoj , J. Narendra 
+Team Members : P.Manoj , J. Narendra , P. Praneeth
 
 ## Problem Statement
 Intelligent Peer Learning Platform
