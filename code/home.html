@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #FFF;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .profile-circle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #FFA500;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 20px);
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .find-peer-btn {
+            background-color: #FF7043;
+        }
+
+        .find-peer-btn:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-circle" id="profileCircle">J</div>
+
+    <div class="container">
+        <h1>Home Page</h1>
+
+        <form id="skillsForm">
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" placeholder="Enter your skills" required>
+
+            <label for="areas">Areas to Improve:</label>
+            <input type="text" id="areas" name="areas" placeholder="Enter areas to improve" required>
+
+            <button type="submit">Submit Skills</button>
+        </form>
+
+        <button class="find-peer-btn" onclick="findPeer()">Find Peer</button>
+    </div>
+
+    <script>
+        // Handle clicking on the profile circle to redirect to the profile page
+        document.getElementById('profileCircle').addEventListener('click', function() {
+            window.location.href = "profile.html"; // Redirect to profile.html
+        });
+
+        // Handle form submission to send skills and areas to the server
+        document.getElementById('skillsForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = localStorage.getItem("username");
+            const skills = document.getElementById('skills').value;
+            const areas = document.getElementById('areas').value;
+
+            // Make sure this URL points to your Flask backend
+            fetch('http://127.0.0.1:5001/submit-skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, skills, areas })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Skills submitted successfully!');
+                } else {
+                    alert('Failed to submit skills.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to submit skills.');
+            });
+        });
+
+        // Redirect to match.html when clicking on "Find Peer"
+        function findPeer() {
+            window.location.href = "match.html"; // Redirect to match.html instead of showing alert
+        }
+    </script>
+
+</body>
+</html>

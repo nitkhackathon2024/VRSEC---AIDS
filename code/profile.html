@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Peer Learning</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #FFCC80, #FFEB99);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .profile-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h2>Profile</h2>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Username:</strong> <span id="username"></span></p>
+        <p><strong>Skills:</strong> <span id="skills"></span></p>
+        <p><strong>Areas for Improvement:</strong> <span id="areas"></span></p>
+        <button onclick="goToProgress()">Track Progress</button>
+    </div>
+
+    <script>
+        document.getElementById('email').innerText = localStorage.getItem('email');
+        document.getElementById('username').innerText = localStorage.getItem('username');
+        document.getElementById('skills').innerText = localStorage.getItem('skills');
+        document.getElementById('areas').innerText = localStorage.getItem('areas');
+
+        function goToProgress() {
+            window.location.href = "progress.html"; // Redirect to progress tracking page
+        }
+    </script>
+
+</body>
+</html>

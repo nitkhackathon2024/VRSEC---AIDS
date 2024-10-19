@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #FFEB99;
+        }
+        #chat-box {
+            width: 80%;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color: white;
+        }
+        #message-input {
+            width: 70%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+    <h2>Real-time Chat</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <!-- Include Socket.IO library -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://127.0.0.1:5001'); // Connect to Socket.IO server
+
+        // Function to display messages
+        function displayMessage(message) {
+            const chatBox = document.getElementById('chat-box');
+            const messageElem = document.createElement('p');
+            messageElem.textContent = message;
+            chatBox.appendChild(messageElem);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Send message to the server
+        function sendMessage() {
+            const message = document.getElementById('message-input').value;
+            if (message.trim()) {
+                socket.emit('chat message', message);
+                document.getElementById('message-input').value = ''; // Clear input
+            }
+        }
+
+        // Receive messages from server
+        socket.on('chat message', (message) => {
+            displayMessage(message);
+        });
+    </script>
+</body>
+</html>

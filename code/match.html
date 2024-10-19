@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Peers - Peer Learning</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #FFCC80, #FFEB99);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .match-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #FF5722;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="match-container">
+        <h2>Enter Areas to Improve</h2>
+        <textarea id="match-areas" rows="4" cols="30" placeholder="Enter areas to improve"></textarea>
+        <br><br>
+        <button onclick="matchPeers()">Find Matches</button>
+        <br><br>
+        <button onclick="startChat()">Chat</button>
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script src="static/match_peers.js"></script>  <!-- Link to your JavaScript file -->
+</body>
+</html>
